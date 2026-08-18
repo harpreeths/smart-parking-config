@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+
+        - id: BOOKING-SERVICE
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/bookings/**
+
+        - id: PARKINGLOT-SERVICE
+          uri: lb://PARKINGLOT-SERVICE
+          predicates:
+            - Path=/parkinglots/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/
